@@ -1,9 +1,12 @@
 from sqlalchemy import create_engine, Column, String, Float
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+import os
 
 Base = declarative_base()
-
+# Create data directory if it doesn't exist
+data_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data')
+os.makedirs(data_dir, exist_ok=True)
 class UserModel(Base):
     __tablename__ = 'users'
     
@@ -18,11 +21,12 @@ class BookModel(Base):
     code = Column(String(6), primary_key=True)
     title = Column(String, nullable=False)
     path = Column(String, nullable=False)
+    cover = Column(String, nullable=False)
     value = Column(Float, nullable=False)
 
-# Create database and tables
-engine = create_engine('sqlite:///library.db')
+# Updated engine with new path
+engine = create_engine(f'sqlite:///{os.path.join(data_dir, "library.db")}')
 Base.metadata.create_all(engine)
 
-# Create session factory
+# Session factory remains the same
 Session = sessionmaker(bind=engine)
