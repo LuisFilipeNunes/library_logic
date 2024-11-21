@@ -1,10 +1,10 @@
-from user_bookstand import UserBookstand
+from classes.user_bookstand import UserBookstand
 class User():
     def __init__(self, name, id, email, password):
         self.name = name
         self.id = id
         self.email = email
-        self.password = password
+        self._password = password
         self.bookstand = UserBookstand()
 
     def adquire_book(self, book):
@@ -16,7 +16,8 @@ class User():
 
         It will return the value of the attribute, or 15 if it fails
         '''
-        try :
-            return getattr(self, att)
-        except:
-            return 15
+        allowd_att = ['name', 'id', 'email', 'bookstand']
+        if att not in allowd_att:
+            raise AttributeError(f'{att} is not a valid attribute')
+        return getattr(self, att)
+        

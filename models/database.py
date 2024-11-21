@@ -9,7 +9,7 @@ data_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data')
 os.makedirs(data_dir, exist_ok=True)
 class UserModel(Base):
     __tablename__ = 'users'
-    
+    id = Column(String(5), nullable=False)
     email = Column(String, primary_key=True)
     name = Column(String, nullable=False)
     password = Column(String, nullable=False)

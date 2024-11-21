@@ -1,6 +1,7 @@
-import bookstand
-import book
-class UserBookstand(bookstand.BookStand):
+from classes.bookstand import BookStand
+from classes.book import Book
+
+class UserBookstand(BookStand):
     def __init__(self):
         super().__init__()
         self.user_id = None

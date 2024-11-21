@@ -1,5 +1,5 @@
 from typing import List
-from book import Book
+from classes.book import Book
 class BookStand():
     def __init__(self):
         self.books: List[Book] = []  # List to store Book objects
